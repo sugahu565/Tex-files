@@ -1,0 +1,169 @@
+\documentclass{beamer}
+
+\usepackage[russian]{babel}
+\usepackage{fontspec}
+
+\setmainfont{Liberation Serif}
+\setsansfont{Liberation Sans}
+\setmonofont{Liberation Mono}
+
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+\usetheme{Madrid}
+\usecolortheme{seahorse}
+
+\title{Алгоритм поиска пути A* (A-star)}
+\author{Тупикова Екатерина Викторовна}
+\date{21.03.2026}
+
+\begin{document}
+
+% Титульный слайд
+\begin{frame}
+    \titlepage
+\end{frame}
+
+% Содержание
+\begin{frame}{Содержание}
+    \tableofcontents
+\end{frame}
+
+\section{Что такое A*}
+\begin{frame}{Что такое A*?}
+    \begin{itemize}
+        \item \textbf{A*} — это алгоритм поиска кратчайшего пути в графе.
+        \item Почти как алгоритм Дейкстры.
+        \item Использует эвристику для ускорения поиска.
+        \item Широко применяется в робототехнике, видеоиграх.
+    \end{itemize}
+\end{frame}
+
+\begin{frame} {Что такое A*?}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.9\linewidth]{Figure_1.png}
+	\end{figure}
+\end{frame}
+\begin{frame} {Что такое A*?}
+	\begin{figure}
+	\centering
+	\includegraphics[width=0.9\linewidth]{astar_fails.png}
+	\end{figure}
+\end{frame}
+
+\section{Математическая основа}
+\begin{frame}{Основная формула}
+    Для каждой рассматриваемой вершины $n$ вычисляется функция стоимости:
+    \Large
+    \[ f(n) = g(n) + h(n) \]
+    \normalsize
+    \begin{block}{Компоненты формулы:}
+        \begin{itemize}
+            \item \textbf{$g(n)$} — стоимость пути (сумма рёбер) от начальной точки до вершины $n$.
+            \item \textbf{$h(n)$} — эвристическая стоимости кратчайшего пути от $n$ до цели.
+            \item \textbf{$f(n)$} — общая стоимость пути от вершины $n$ до цели.
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\section{Эвристические функции}
+\begin{frame}{Популярные эвристики}
+    Выбор $h(n)$ зависит от типа перемещения:
+    \begin{itemize}
+        \item \textbf{Расстояние Манхэттена}.
+        \item \textbf{Расстояние Чебышева}.
+        \item \textbf{Евклидово расстояние}.
+    \end{itemize}
+    Эвристика должна быть допустимой, т.е. не завышать реальную стоимость.
+\end{frame}
+
+\section{Алгоритм работы}
+\begin{frame}{Механика алгоритма}
+    Алгоритм использует два "списка":
+    \begin{enumerate}
+        \item \textbf{Open List (Список непосещённых вершин)}: очередь с приоритетом по $f(n)$.
+        \item \textbf{Closed List (Список посещённых вершин)}: массив, где посещённые отмечены.
+    \end{enumerate}
+    
+    \begin{exampleblock}{Логика цикла}
+        На каждой итерации берем вершину с \textbf{минимальным $f(n)$}, заносим в список непосещённых вершин соседей с новыми весами, заносим текущую вершину в посещённую.
+    \end{exampleblock}
+\end{frame}
+
+\begin{frame}
+	\centering
+	\Huge \textbf{Пример работы}
+\end{frame}
+
+\section{Пример работы}
+\begin{frame}{Пример работы}
+	\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{GOD_SAVE_GEMINI/Step0.png}
+	\end{figure}
+\end{frame}
+\begin{frame}{Пример работы}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\linewidth]{GOD_SAVE_GEMINI/Step1.png}
+	\end{figure}
+\end{frame}
+\begin{frame}{Пример работы}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\linewidth]{GOD_SAVE_GEMINI/Step2.png}
+	\end{figure}
+\end{frame}
+\begin{frame}{Пример работы}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\linewidth]{GOD_SAVE_GEMINI/Step3.png}
+	\end{figure}
+\end{frame}
+\begin{frame}{Пример работы}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\linewidth]{GOD_SAVE_GEMINI/End_alg.png}
+	\end{figure}
+\end{frame}
+\begin{frame}{Пример работы}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.9\linewidth]{GOD_SAVE_GEMINI/GodSaveGemini.png}
+	\end{figure}
+\end{frame}
+
+\section{Пример применения}
+\begin{frame}{D*}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.5\linewidth]{D*/step1.png}
+	\end{figure}
+	\footnote{Источник: Stentz, A. (1994). CMU-RI-TR-94-37.}
+\end{frame}
+\begin{frame}{D*}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.5\linewidth]{D*/step2.png}
+	\end{figure}
+	\footnote{Источник: Stentz, A. (1994). CMU-RI-TR-94-37.}
+\end{frame}
+\begin{frame}{D*}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.5\linewidth]{D*/step3.png}
+	\end{figure}
+	\footnote{Источник: Stentz, A. (1994). CMU-RI-TR-94-37.}
+\end{frame}
+
+\begin{frame}{Заключение}
+    \centering
+    \Huge Спасибо за внимание! \\
+    \vspace{1cm}
+\end{frame}
+
+\end{document}
